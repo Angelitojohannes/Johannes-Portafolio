@@ -2,6 +2,96 @@
 @tailwind components;
 @tailwind utilities;
 
+.brand-mark {
+  position: relative;
+}
+
+.brand-mark__shape,
+.brand-mark__dust {
+  position: absolute;
+  inset: 0;
+}
+
+.brand-mark--animated .brand-mark__shape {
+  animation: brand-mark-dissolve 5.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.brand-mark--animated .brand-mark__dust {
+  background:
+    radial-gradient(circle, #b47a61 0 1.2px, transparent 1.7px) 18% 63% / 8px 8px,
+    radial-gradient(circle, #d9c9ae 0 1px, transparent 1.6px) 68% 47% / 10px 10px,
+    radial-gradient(circle, #858875 0 1.1px, transparent 1.7px) 45% 78% / 9px 9px,
+    radial-gradient(circle, #b3bba7 0 0.9px, transparent 1.5px) 78% 24% / 11px 11px;
+  opacity: 0;
+  transform: translate3d(-3px, 2px, 0) scale(0.8);
+  animation: brand-mark-dust 5.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes brand-mark-dissolve {
+  0%,
+  48%,
+  88%,
+  100% {
+    clip-path: inset(0);
+    filter: blur(0);
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0);
+  }
+
+  56% {
+    clip-path: inset(0 0 28% 0);
+    filter: blur(1px);
+    opacity: 0.62;
+    transform: translate3d(2px, -2px, 0) rotate(3deg) scale(0.96);
+  }
+
+  64%,
+  72% {
+    clip-path: inset(0 0 100% 0);
+    filter: blur(2.5px);
+    opacity: 0;
+    transform: translate3d(6px, -7px, 0) rotate(7deg) scale(0.9);
+  }
+
+  80% {
+    clip-path: inset(0 0 34% 0);
+    filter: blur(0.7px);
+    opacity: 0.68;
+    transform: translate3d(1px, -1px, 0) rotate(2deg) scale(0.98);
+  }
+}
+
+@keyframes brand-mark-dust {
+  0%,
+  49%,
+  87%,
+  100% {
+    opacity: 0;
+    transform: translate3d(-3px, 2px, 0) scale(0.8);
+  }
+
+  58% {
+    opacity: 1;
+    transform: translate3d(3px, -5px, 0) scale(1.15);
+  }
+
+  74% {
+    opacity: 0.5;
+    transform: translate3d(12px, -12px, 0) scale(1.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-mark--animated .brand-mark__shape,
+  .brand-mark--animated .brand-mark__dust {
+    animation: none;
+  }
+
+  .brand-mark--animated .brand-mark__dust {
+    display: none;
+  }
+}
+
 .projects-masonry {
   column-count: auto;
   column-width: 18rem;
